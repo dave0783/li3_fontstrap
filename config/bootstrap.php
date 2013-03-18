@@ -116,7 +116,7 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) use ($options) {
     }
 
     if ($options['font-awesome']) {
-        $less = str_replace('sprites.less', 'font-awesome.less', $less);
+        $less = str_replace('glyphicons.less', 'font-awesome.less', $less);
     }
 
     try {
