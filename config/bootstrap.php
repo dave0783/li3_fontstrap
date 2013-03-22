@@ -11,7 +11,7 @@
  *
  * {{{
  * Libraries::add('li3_fontstrap', array(
- *     'disabled' => array('progress-bars', 'accordion', 'carousel', 'hero-unit'), // disable unused componenets.
+ *     'disabled' => array('progress-bars', 'accordion', 'carousel', 'hero-unit'), // disable unused components.
  *     'custom' => array('style'), // Add custom .less files from your `app/webroot/less` folder.
  *     'font-awesome' => false, // Enabled by default.
  * ));
@@ -23,7 +23,7 @@
  * echo $this->html->style('bootstrap');
  * }}}
  *
- * @todo Add minfiy support.
+ * @todo Add minify support.
  * @todo Add bootstrap and font-awesome documentation support.
  * @todo Add support for bootstrap javascript files.
  * @todo Clean up filters. Move logic to external classes.
@@ -40,10 +40,10 @@ $options = Libraries::get('li3_fontstrap') + array(
     'import_path'    => LITHIUM_APP_PATH . '/webroot/less',
     'cache_path'     => LITHIUM_APP_PATH . '/resources/tmp/cache/css',
     'bootstrap_name' => 'bootstrap.css',
-    'minify'         => false, // Minify compiled css files. Not yet used.
-    'font-awesome'   => true,  // Replaces the bootstrap glyphicons with font-awesome.
-    'disabled'       => array(),
-    'custom'         => array(),
+    'minify'         => false,   // Minify compiled css files. Not yet used.
+    'font-awesome'   => true,    // Replaces the bootstrap glyphicons with font-awesome.
+    'disabled'       => array(), // Disable unused bootstrap modules.
+    'custom'         => array(), // Add custom .less files to bootstrap.
 );
 
 Dispatcher::applyFilter('run', function($self, $params, $chain) use ($options) {
@@ -98,8 +98,7 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) use ($options) {
 
     $bootstrap_path = $options['bootstrap_path'] . '/less';
     $font_path = $options['font_path'] . '/less';
-
-    $less_file = str_replace('.css', '.less', "{$bootstrap_path}/bootstrap.less");
+    $less_file = $bootstrap_path . '/bootstrap.less';
 
     if (!file_exists($less_file)) {
         return $chain->next($self, $params, $chain);
