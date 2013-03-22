@@ -23,10 +23,10 @@
  * echo $this->html->style('bootstrap');
  * }}}
  *
- * @todo: Add minfiy support.
- * @todo: Add bootstrap and font-awesome documentation support.
- * @todo: Add support for bootstrap javascript files.
- * @todo: Clean up filters. Move logic to external classes.
+ * @todo Add minfiy support.
+ * @todo Add bootstrap and font-awesome documentation support.
+ * @todo Add support for bootstrap javascript files.
+ * @todo Clean up filters. Move logic to external classes.
  */
 
 use lithium\core\Libraries;
@@ -71,9 +71,9 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) use ($options) {
 Dispatcher::applyFilter('run', function($self, $params, $chain) use ($options) {
     $request = $params['request'];
 
-	if (!strstr($request->url, $options['bootstrap_name'])) {
-		return $chain->next($self, $params, $chain);
-	}
+    if (!strstr($request->url, $options['bootstrap_name'])) {
+        return $chain->next($self, $params, $chain);
+    }
 
     if (!is_dir($options['cache_path'])) mkdir($options['cache_path']);
 
@@ -96,14 +96,14 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) use ($options) {
         unlink($file);
     }
 
-	$bootstrap_path = $options['bootstrap_path'] . '/less';
+    $bootstrap_path = $options['bootstrap_path'] . '/less';
     $font_path = $options['font_path'] . '/less';
 
-	$less_file = str_replace('.css', '.less', "{$bootstrap_path}/bootstrap.less");
+    $less_file = str_replace('.css', '.less', "{$bootstrap_path}/bootstrap.less");
 
-	if (!file_exists($less_file)) {
-		return $chain->next($self, $params, $chain);
-	}
+    if (!file_exists($less_file)) {
+        return $chain->next($self, $params, $chain);
+    }
 
     $less = file_get_contents($less_file);
 
@@ -131,6 +131,6 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) use ($options) {
         $less = "lessphp fatal error: " . $e->getMessage();
     }
 
-	return new Response(array('body' => $less, 'headers' => array('Content-type' => 'text/css')));
+    return new Response(array('body' => $less, 'headers' => array('Content-type' => 'text/css')));
 });
 
