@@ -71,7 +71,7 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) use ($options) {
 Dispatcher::applyFilter('run', function($self, $params, $chain) use ($options) {
     $request = $params['request'];
 
-    if (preg_match('|^js/bootstrap-.+\.js$|', $request->url)) {
+    if (preg_match('|^/?js/bootstrap-.+\.js$|', $request->url)) {
         return new Response(array(
             'body' => file_get_contents($options['bootstrap_path'] . '/' . $request->url),
             'headers' => array('Content-type' => 'application/javascript'),
