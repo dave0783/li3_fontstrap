@@ -87,7 +87,7 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) use ($options) {
         return $chain->next($self, $params, $chain);
     }
 
-    if (!is_dir($options['cache_path'])) mkdir($options['cache_path']);
+    if (!is_dir($options['cache_path'])) mkdir($options['cache_path'],0777,true);
 
     $bootstrap_hash = sha1(serialize($options['disabled']) . '-' . $options['font-awesome']);
     $custom_hash = sha1(serialize(array_filter(array_map(function($v) use ($options) {
