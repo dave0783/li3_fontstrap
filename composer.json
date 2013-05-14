@@ -1,0 +1,12 @@
+{
+    "name": "rspenc29/li3_fontstrap",
+    "type": "lithium-library",
+    "description": "",
+    "authors": [{
+        "name": "Rob Spencer"
+    }],
+    "require": {
+        "php": ">=5.3.0",
+        "composer/installers": "*"
+    }
+}
